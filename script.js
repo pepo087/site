@@ -45,3 +45,12 @@ document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
 });
 
+// Mostra la sezione di benvenuto all'inizio
+const welcomeSection = document.getElementById('welcome');
+if (welcomeSection) {
+    welcomeSection.style.display = "block"; // Mostra la sezione di benvenuto
+    const content = welcomeSection.querySelector('.section-content');
+    if (content) {
+        content.classList.add('visible'); // Aggiungi la classe visibile alla sezione di benvenuto
+    }
+}
