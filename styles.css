@@ -91,10 +91,14 @@ h2 {
 
 
 footer {
-    background-color: #333;
+  background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
+    background-size: cover; /* L'immagine copre tutto lo schermo */
+    background-position: center; /* L'immagine è centrata */
+    background-repeat: no-repeat; /* L'immagine non si ripete */
+    background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0;
     width: 100%;
     position: fixed; /* Fissa il footer */
     bottom: 0;       /* Posizionalo alla fine della pagina */
