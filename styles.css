@@ -42,7 +42,7 @@ section {
 
 /* Animazione per mostrare il contenuto da sinistra a destra */
 .section-content {
-    transform: translateX(+100%);
+    transform: translateX(100%);
     opacity: 0;
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
