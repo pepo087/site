@@ -14,7 +14,12 @@ document.querySelectorAll('nav a').forEach(link => {
         event.preventDefault(); // Impedisce il comportamento predefinito del link
     });
 });
-
+ $(document).ready(function() {
+        $('.skill-title').click(function() {
+            // Toggle la visibilità del contenuto e gestisci l'animazione slide
+            $(this).next('.skill-content').slideToggle(300);
+        });
+    });
 // Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
