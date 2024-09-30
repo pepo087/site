@@ -5,8 +5,9 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 
-    
-
+     height: 100%; /* Assicurati che il body occupi tutta l'altezza della viewport */
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -103,8 +104,9 @@ h2 {
     color: #ffa500;
 }
 
-
-
+main {
+    flex: 1; /* Occupa tutto lo spazio disponibile tra header e footer */
+}
 footer {
 background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
