@@ -44,10 +44,24 @@ h2 {
     color: #333;
 }
 
-/* Nascondi il contenuto delle competenze all'inizio */
 .skill-content {
     display: none; /* Nascondi il contenuto all'inizio */
+    overflow: hidden; /* Nascondi eventuali overflow durante la transizione */
+    transition: max-height 0.5s ease-out; /* Aggiungi transizione per la massima altezza */
+    max-height: 0; /* Inizialmente impostiamo l'altezza massima a 0 */
 }
+
+/* Stili per le skill-title */
+.skill-title {
+    cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
+    transition: all 0.3s ease; /* Aggiungi una transizione per il passaggio del mouse */
+}
+
+.skill-title:hover {
+    color: #ffa500; /* Cambia colore al passaggio del mouse */
+    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+}
+
 
 footer {
     text-align: center;
