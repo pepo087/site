@@ -51,7 +51,16 @@ section {
     transform: translateX(0);
     opacity: 1;
 }
+.project-item {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
 
+.project-item.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
 h2 {
     color: #333;
 }
