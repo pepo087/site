@@ -1,19 +1,22 @@
-// Funzione per mostrare/nascondere le sezioni
+// Funzione per mostrare/nascondere le sezioni al clic
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', function(event) {
         const sectionId = this.getAttribute('href');
         const section = document.querySelector(sectionId);
         
-        if (section.style.display === "none" || section.style.display === "") {
-            section.style.display = "block"; // Mostra la sezione
-        } else {
-            section.style.display = "none"; // Nascondi la sezione
-        }
+        // Nascondi tutte le sezioni
+        document.querySelectorAll('section').forEach(sec => {
+            sec.style.display = "none"; // Nascondi tutte le sezioni
+        });
+
+        // Mostra la sezione cliccata
+        section.style.display = "block"; // Mostra la sezione selezionata
+
         event.preventDefault(); // Impedisce il comportamento predefinito del link
     });
 });
 
-// Mostra/nascondi il contenuto al passaggio del mouse
+// Mostra/nascondi il contenuto delle competenze al passaggio del mouse
 $(document).ready(function() {
     $('.skill-title').hover(
         function() {
