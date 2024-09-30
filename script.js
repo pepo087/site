@@ -9,7 +9,9 @@ document.querySelectorAll('nav a').forEach(link => {
         // Nascondi tutte le sezioni
         document.querySelectorAll('section').forEach(sec => {
             const content = sec.querySelector('.section-content');
-            content.classList.remove('visible'); // Rimuovi la classe visibile
+            if (content) { // Controlla se l'elemento è presente
+                content.classList.remove('visible'); // Rimuovi la classe visibile
+            }
             sec.style.display = "none"; // Nascondi tutte le sezioni
         });
 
@@ -19,7 +21,9 @@ document.querySelectorAll('nav a').forEach(link => {
         // Aggiungi un timeout per assicurarti che la sezione sia visibile prima di aggiungere la classe
         setTimeout(() => {
             const content = section.querySelector('.section-content');
-            content.classList.add('visible'); // Aggiungi la classe visibile
+            if (content) { // Controlla se l'elemento è presente
+                content.classList.add('visible'); // Aggiungi la classe visibile
+            }
         }, 50); // Breve ritardo per permettere alla sezione di essere visibile
     });
 });
