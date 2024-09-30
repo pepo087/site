@@ -39,7 +39,21 @@ header nav a {
 header nav a:hover {
     color: #ffa500;
 }
+#welcome {
+    padding: 20px;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.8); /* Bianco traslucido per il background */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombra per dare profondità */
+}
 
+#welcome h2 {
+    color: #333;
+}
+
+#welcome p {
+    color: #555; /* Colore per il testo */
+}
 section {
     padding: 20px;
     margin: 20px 0;
