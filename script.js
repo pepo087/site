@@ -11,6 +11,10 @@ document.querySelectorAll('nav a').forEach(link => {
             const content = sec.querySelector('.section-content');
             if (content) { // Controlla se l'elemento è presente
                 content.classList.remove('visible'); // Rimuovi la classe visibile
+                // Nascondi anche gli item di progetto
+                sec.querySelectorAll('.project-item').forEach(item => {
+                    item.classList.remove('visible');
+                });
             }
             sec.style.display = "none"; // Nascondi tutte le sezioni
         });
@@ -24,6 +28,14 @@ document.querySelectorAll('nav a').forEach(link => {
             if (content) { // Controlla se l'elemento è presente
                 content.classList.add('visible'); // Aggiungi la classe visibile
             }
+
+            // Mostra gli elementi di progetto uno alla volta
+            const items = section.querySelectorAll('.project-item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible'); // Aggiungi la classe visibile a ciascun progetto
+                }, index * 200); // Ritardo incrementale per ciascun elemento
+            });
         }, 50); // Breve ritardo per permettere alla sezione di essere visibile
     });
 });
