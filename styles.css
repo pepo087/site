@@ -54,7 +54,7 @@ section {
 .project-item {
     transform: translateX(100%);
     opacity: 0;
-    transition: transform 1s ease-out, opacity 1s ease-out;
+    transition: transform 0.5s ease-out, opacity 1s ease-out;
 }
 
 .project-item.visible {
