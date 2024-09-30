@@ -3,7 +3,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    
     background-image: url('images/peakpx.jpg'); /* Percorso dell'immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
     background-position: center; /* L'immagine è centrata */
