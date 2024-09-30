@@ -16,7 +16,7 @@ header {
     background-repeat: no-repeat; /* L'immagine non si ripete */
     background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
     background: #333;
-    color: #fff;
+        background-color: rgba(51, 51, 51, 0.7); /* Colore scuro con 70% di opacità */
     padding: 20px 0;
     text-align: center;
 }
@@ -44,7 +44,7 @@ header nav a:hover {
 section {
     padding: 20px;
     margin: 20px 0;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.8); /* Sfondo bianco con 80% di opacità */
     border-radius: 5px;
 }
 
