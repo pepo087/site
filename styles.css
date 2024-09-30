@@ -59,7 +59,7 @@ h2 {
 
 .skill-title:hover {
     color: #ffa500; /* Cambia colore al passaggio del mouse */
-    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+    transform: scale(1); /* Effetto di ingrandimento al passaggio del mouse */
 }
 
 
