@@ -22,16 +22,18 @@ document.querySelectorAll('nav a').forEach(link => {
     });
 });
 
-
 // Mostra/nascondi il contenuto delle competenze al passaggio del mouse
 $(document).ready(function() {
     $('.skill-title').hover(
         function() {
-            // Mostra il contenuto con slide down
             $(this).next('.skill-content').stop(true, true).slideDown(300);
+        },
+        function() {
+            $(this).next('.skill-content').stop(true, true).slideUp(300);
         }
     );
 });
+
 // Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
