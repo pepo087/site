@@ -98,7 +98,7 @@ footer {
     background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 1px 0;
     width: 100%;
     position: fixed; /* Fissa il footer */
     bottom: 0;       /* Posizionalo alla fine della pagina */
