@@ -39,6 +39,17 @@ section {
     background: #fff;
     border-radius: 5px;
 }
+/* Animazione per mostrare il contenuto da sinistra a destra */
+.section-content {
+    transform: translateX(-100%); /* Inizia a sinistra */
+    opacity: 0; /* Inizia invisibile */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Transizione per la trasformazione e l'opacità */
+}
+
+.section-content.visible {
+    transform: translateX(0); /* Posizione finale */
+    opacity: 1; /* Visibile */
+}
 
 h2 {
     color: #333;
