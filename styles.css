@@ -26,11 +26,11 @@ header nav ul li {
 header nav a {
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s; /* Transizione per l'effetto hover */
+    transition: color 0.3s;
 }
 
 header nav a:hover {
-    color: #ffa500; /* Cambia colore al passaggio del mouse */
+    color: #ffa500;
 }
 
 section {
@@ -39,16 +39,17 @@ section {
     background: #fff;
     border-radius: 5px;
 }
+
 /* Animazione per mostrare il contenuto da sinistra a destra */
 .section-content {
-    transform: translateX(-100%); /* Inizia a sinistra */
-    opacity: 0; /* Inizia invisibile */
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Transizione per la trasformazione e l'opacità */
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .section-content.visible {
-    transform: translateX(0); /* Posizione finale */
-    opacity: 1; /* Visibile */
+    transform: translateX(0);
+    opacity: 1;
 }
 
 h2 {
@@ -56,23 +57,20 @@ h2 {
 }
 
 .skill-content {
-    display: none; /* Nascondi il contenuto all'inizio */
-    overflow: hidden; /* Nascondi eventuali overflow durante la transizione */
-    transition: max-height 0.5s ease-out; /* Aggiungi transizione per la massima altezza */
-    max-height: 0; /* Inizialmente impostiamo l'altezza massima a 0 */
+    display: none;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    max-height: 0;
 }
 
-/* Stili per le skill-title */
 .skill-title {
-    cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
-    transition: all 0.3s ease; /* Aggiungi una transizione per il passaggio del mouse */
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .skill-title:hover {
-    color: #ffa500; /* Cambia colore al passaggio del mouse */
-    transform: scale(1); /* Effetto di ingrandimento al passaggio del mouse */
+    color: #ffa500;
 }
-
 
 footer {
     text-align: center;
