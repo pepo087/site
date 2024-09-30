@@ -34,7 +34,7 @@ document.querySelectorAll('nav a').forEach(link => {
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('visible'); // Aggiungi la classe visibile a ciascun progetto
-                }, index * 300); // Ritardo incrementale per ciascun elemento (300 ms per esempio)
+                }, index * 500); // Ritardo incrementale per ciascun elemento (300 ms per esempio)
             });
         }, 50); // Breve ritardo per permettere alla sezione di essere visibile
     });
