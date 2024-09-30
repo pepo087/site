@@ -3,16 +3,18 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
     
-    background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* L'immagine copre tutto lo schermo */
-    background-position: center; /* L'immagine è centrata */
-    background-repeat: repeat; /* L'immagine non si ripete */
-    background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
+
 }
 
 
 header {
+    background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
+    background-size: cover; /* L'immagine copre tutto lo schermo */
+    background-position: center; /* L'immagine è centrata */
+    background-repeat: no-repeat; /* L'immagine non si ripete */
+    background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
     background: #333;
     color: #fff;
     padding: 20px 0;
