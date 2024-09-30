@@ -15,8 +15,7 @@ header {
     background-position: center; /* L'immagine è centrata */
     background-repeat: no-repeat; /* L'immagine non si ripete */
     background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
-    background: #333;
-        background-color: rgba(51, 51, 51, 0.7); /* Colore scuro con 70% di opacità */
+
     padding: 20px 0;
     text-align: center;
 }
