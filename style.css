@@ -26,7 +26,13 @@ header nav ul li {
 header nav a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s; /* Transizione per l'effetto hover */
 }
+
+header nav a:hover {
+    color: #ffa500; /* Cambia colore al passaggio del mouse */
+}
+
 
 section {
     padding: 20px;
