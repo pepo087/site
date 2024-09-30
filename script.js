@@ -11,11 +11,11 @@ document.querySelectorAll('nav a').forEach(link => {
             const content = sec.querySelector('.section-content');
             if (content) { // Controlla se l'elemento è presente
                 content.classList.remove('visible'); // Rimuovi la classe visibile
-                // Nascondi anche gli item di progetto
-                sec.querySelectorAll('.project-item').forEach(item => {
-                    item.classList.remove('visible');
-                });
             }
+            // Nascondi anche gli item di progetto
+            sec.querySelectorAll('.project-item').forEach(item => {
+                item.classList.remove('visible');
+            });
             sec.style.display = "none"; // Nascondi tutte le sezioni
         });
 
@@ -26,7 +26,7 @@ document.querySelectorAll('nav a').forEach(link => {
         setTimeout(() => {
             const content = section.querySelector('.section-content');
             if (content) { // Controlla se l'elemento è presente
-                content.classList.add('visible'); // Aggiungi la classe visibile
+                content.classList.add('visible'); // Aggiungi la classe visibile alla sezione
             }
 
             // Mostra gli elementi di progetto uno alla volta
@@ -34,22 +34,10 @@ document.querySelectorAll('nav a').forEach(link => {
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('visible'); // Aggiungi la classe visibile a ciascun progetto
-                }, index * 200); // Ritardo incrementale per ciascun elemento
+                }, index * 300); // Ritardo incrementale per ciascun elemento (300 ms per esempio)
             });
         }, 50); // Breve ritardo per permettere alla sezione di essere visibile
     });
-});
-
-// Mostra/nascondi il contenuto delle competenze al passaggio del mouse
-$(document).ready(function() {
-    $('.skill-title').hover(
-        function() {
-            $(this).next('.skill-content').stop(true, true).slideDown(300);
-        },
-        function() {
-            $(this).next('.skill-content').stop(true, true).slideUp(300);
-        }
-    );
 });
 
 // Nascondi tutte le sezioni all'inizio
