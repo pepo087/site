@@ -4,6 +4,12 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    background-image: url('images/peakpx.jpg'); /* Percorso dell'immagine */
+    background-size: cover; /* L'immagine copre tutto lo schermo */
+    background-position: center; /* L'immagine è centrata */
+    background-repeat: no-repeat; /* L'immagine non si ripete */
+    background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
+}
 }
 
 header {
