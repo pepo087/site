@@ -1,7 +1,4 @@
-// Mostra un messaggio di benvenuto quando la pagina si carica
-window.onload = function() {
-    alert("Benvenuto nella mia pagina web professionale!");
-};
+
 
 // Funzione per mostrare/nascondere le sezioni
 document.querySelectorAll('nav a').forEach(link => {
