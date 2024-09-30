@@ -21,11 +21,11 @@ $(document).ready(function() {
     $('.skill-title').hover(
         function() {
             // Mostra il contenuto con slide down
-            $(this).next('.skill-content').stop(true, true).slideDown(300);
+            $(this).next('.skill-content').stop(true, true).slideDown(3000);
         },
         function() {
             // Nascondi il contenuto con slide up
-            $(this).next('.skill-content').stop(true, true).slideUp(300);
+            $(this).next('.skill-content').stop(true, true).slideUp(3000);
         }
     );
 });
