@@ -11,7 +11,10 @@ document.querySelectorAll('nav a').forEach(link => {
 
         // Mostra la sezione cliccata
         section.style.display = "block"; // Mostra la sezione selezionata
-
+ // Aggiungi un timeout per assicurarti che la sezione sia visibile prima di aggiungere la classe
+        setTimeout(() => {
+            section.querySelector('.section-content').classList.add('visible'); // Aggiungi la classe visibile
+        }, 50); // Breve ritardo per permettere alla sezione di essere visibile
         event.preventDefault(); // Impedisce il comportamento predefinito del link
     });
 });
