@@ -10,7 +10,7 @@ body {
     background-repeat: no-repeat; /* L'immagine non si ripete */
     background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
 }
-}
+
 
 header {
     background: #333;
