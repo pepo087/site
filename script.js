@@ -66,18 +66,7 @@ document.querySelectorAll('nav a').forEach(link => {
         items.forEach(item => list.appendChild(item));
     }
 
-    function sortListByDate() {
-        const list = document.getElementById('linkList');
-        const items = Array.from(list.getElementsByTagName('li'));
-
-        items.sort((a, b) => {
-            const dateA = new Date(a.getAttribute('data-date'));
-            const dateB = new Date(b.getAttribute('data-date'));
-            return dateA - dateB;
-        });
-
-        // Riaggiungi gli elementi ordinati alla lista
-        items.forEach(item => list.appendChild(item));
+   
     }// Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
