@@ -61,8 +61,16 @@ document.querySelectorAll('nav a').forEach(link => {
             const nameB = b.textContent.toLowerCase();
             return nameA.localeCompare(nameB);
         });
-
+    function sortListByDate() {
+        const list = document.getElementById('linkList');
+        const items = Array.from(list.getElementsByTagName('li'));
+        items.sort((a, b) => {
+            const dateA = new Date(a.getAttribute('data-date'));
+            const dateB = new Date(b.getAttribute('data-date'));
+            return dateA - dateB;
+        });
         // Riaggiungi gli elementi ordinati alla lista
+              // Riaggiungi gli elementi ordinati alla lista
         items.forEach(item => list.appendChild(item));
     }
 
