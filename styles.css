@@ -69,9 +69,7 @@ section {
     opacity: 0;
     transition: transform 1s ease-out, opacity 1s ease-out;
      background-color: #f4f4f4; /* Colore di sfondo uguale a quello del body */
-    border-radius: 5px; /* Arrotonda gli angoli, se desiderato */
-    padding: 20px; /* Padding interno per separare il contenuto dal bordo */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra per dare profondità */
+
 }
 
 .section-content.visible {
