@@ -71,6 +71,9 @@ document.querySelectorAll('nav a').forEach(link => {
 document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
 });
+// Mostra la sezione "rabbit" e "networking"
+document.getElementById('rabbit').style.display = "block";
+document.getElementById('networking').style.display = "block";
 
 // Mostra la sezione di benvenuto all'inizio
 const welcomeSection = document.getElementById('welcome');
