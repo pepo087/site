@@ -112,19 +112,29 @@ main {
 
 
 
+/* Contenitore del form */
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-width: 600px; /* Imposta la larghezza massima */
+    margin: 0 auto; /* Centra il form orizzontalmente */
+    padding: 20px; /* Aggiungi padding interno */
+    background-color: #fff; /* Colore di sfondo */
+    border-radius: 10px; /* Arrotonda gli angoli */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra */
 }
 
+/* Campi di input e textarea */
 input, textarea {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%; /* Assicura che i campi occupino tutta la larghezza disponibile del form */
 }
 
+/* Bottone di invio */
 button {
     padding: 10px 15px;
     font-size: 16px;
@@ -138,6 +148,7 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
 
 footer {
 background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
