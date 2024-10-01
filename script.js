@@ -39,8 +39,46 @@ document.querySelectorAll('nav a').forEach(link => {
         }, 50); // Breve ritardo per permettere alla sezione di essere visibile
     });
 });
+ function filterList() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const list = document.getElementById('linkList');
+        const items = list.getElementsByTagName('li');
 
-// Nascondi tutte le sezioni all'inizio
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const text = item.textContent || item.innerText;
+            item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+        }
+    }
+
+    function sortListByName() {
+        const list = document.getElementById('linkList');
+        const items = Array.from(list.getElementsByTagName('li'));
+
+        items.sort((a, b) => {
+            const nameA = a.textContent.toLowerCase();
+            const nameB = b.textContent.toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+
+        // Riaggiungi gli elementi ordinati alla lista
+        items.forEach(item => list.appendChild(item));
+    }
+
+    function sortListByDate() {
+        const list = document.getElementById('linkList');
+        const items = Array.from(list.getElementsByTagName('li'));
+
+        items.sort((a, b) => {
+            const dateA = new Date(a.getAttribute('data-date'));
+            const dateB = new Date(b.getAttribute('data-date'));
+            return dateA - dateB;
+        });
+
+        // Riaggiungi gli elementi ordinati alla lista
+        items.forEach(item => list.appendChild(item));
+    }// Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
 });
