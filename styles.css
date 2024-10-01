@@ -113,8 +113,15 @@ main {
         overflow-y: auto; /* Permette lo scrolling verticale se necessario */
 }
 
-
-
+ ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
 /* Contenitore del form */
 form {
     display: flex;
