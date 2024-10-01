@@ -44,7 +44,7 @@ header nav a:hover {
 #welcome {
     padding: 20px;
     margin: 20px 0;
-    background: rgba(255, 255, 255, 0.8); /* Bianco traslucido per il background */
+     background-color: #f4f4f4; /* Colore di sfondo uguale a quello del body */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombra per dare profondità */
 }
