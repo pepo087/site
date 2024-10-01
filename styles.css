@@ -108,6 +108,37 @@ main {
     flex: 1; /* Occupa tutto lo spazio disponibile tra header e footer */
         overflow-y: auto; /* Permette lo scrolling verticale se necessario */
 }
+
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 footer {
 background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
