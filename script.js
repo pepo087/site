@@ -78,7 +78,7 @@ document.querySelectorAll('nav a').forEach(link => {
     }
 
    
-    }// Nascondi tutte le sezioni all'inizio
+    // Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
     section.style.display = "none";
 });
