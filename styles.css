@@ -118,7 +118,7 @@ form {
     flex-direction: column;
     gap: 10px;
     max-width: 600px; /* Imposta la larghezza massima */
-    margin: 0 auto; /* Centra il form orizzontalmente */
+    margin: 0 left; /* Centra il form orizzontalmente */
     padding: 20px; /* Aggiungi padding interno */
     background-color: #fff; /* Colore di sfondo */
     border-radius: 10px; /* Arrotonda gli angoli */
@@ -127,11 +127,14 @@ form {
 
 /* Campi di input e textarea */
 input, textarea {
-    padding: 10px;
+   padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%; /* Assicura che i campi occupino tutta la larghezza disponibile del form */
+    resize: vertical; /* Permette solo la ridimensione verticale */
+    overflow: auto;   /* Mostra le barre di scorrimento se necessario */
+    max-width: 100%;  /* Assicura che non superi la larghezza del form */
+    box-sizing: border-box; /* Include il padding e il bordo nel calcolo della larghezza */
 }
 
 /* Bottone di invio */
