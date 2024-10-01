@@ -162,16 +162,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-.search-container {
-    display: flex;           /* Imposta il contenitore come flex */
-    align-items: center;    /* Allinea verticalmente gli elementi al centro */
-    gap: 10px;              /* Aggiunge uno spazio tra gli elementi */
-}
 
-#searchInput {
-    flex: 1;                /* Fa sì che l'input occupi tutto lo spazio disponibile */
-    padding: 8px;          /* Padding per rendere l'input più grande */
-}
 footer {
 background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
