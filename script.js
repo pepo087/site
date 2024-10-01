@@ -61,6 +61,9 @@ document.querySelectorAll('nav a').forEach(link => {
             const nameB = b.textContent.toLowerCase();
             return nameA.localeCompare(nameB);
         });
+           // Riaggiungi gli elementi ordinati alla lista
+    items.forEach(item => list.appendChild(item));
+}
     function sortListByDate() {
         const list = document.getElementById('linkList');
         const items = Array.from(list.getElementsByTagName('li'));
