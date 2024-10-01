@@ -71,22 +71,19 @@
     <section id="contact">
         <h2>Contatti</h2>
          <div class="section-content">
-<!-- modify this form HTML and place wherever you want your form -->
-<form
-  action="https://formspree.io/f/mkgwdygq"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
+
+<form id="contactForm" method="post" action="https://formspree.io/f/mkgwdygq">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Messaggio:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Invia</button>
+        </form> 
     </section>
 
 
