@@ -61,6 +61,8 @@ section {
     margin: 20px 0;
     background-color: #f4f4f4; /* Colore di sfondo uguale a quello del body */
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombra per dare profondità */
+
 }
 
 /* Animazione per mostrare il contenuto da sinistra a destra */
