@@ -112,14 +112,16 @@ main {
     flex: 1; /* Occupa tutto lo spazio disponibile tra header e footer */
         overflow-y: auto; /* Permette lo scrolling verticale se necessario */
 }
-ul#linkList li {
-    display: flex;
+.icon-varie {
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
 }
 
-ul#linkList li img {
-    width: 20px; /* Dimensione dell'icona */
-    margin-right: 10px; /* Spazio tra l'icona e il testo */
+.icon-varie::before {
+    content: url('https://img.icons8.com/?size=100&id=84826&format=png&color=000000'); /* Icona personalizzata */
+    margin-right: 10px;
+    width: 24px;
 }
 
 
