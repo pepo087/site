@@ -86,7 +86,12 @@
         </form> 
     </section>
 <section id="file-explorer">
-    <h2>
+  
+</section>
+
+<section id="rabbit">
+    <h2><span class="icon-varie" onclick="togglePopup()">Varie</span></h2>
+  <h2>
         <span class="icon-varie" onclick="toggleFolder()">
             <img src="https://img.icons8.com/?size=100&id=12160&format=png&color=000000" alt="Icona Varie" class="folder-icon">
             Varie
@@ -117,19 +122,7 @@
             </li>
         </ul>
     </div>
-</section>
-
-<section id="rabbit">
-    <h2><span class="icon-varie" onclick="togglePopup()">Varie</span></h2>
-
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="togglePopup()">&times;</span>
-            <h2>Varie</h2>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Cerca per parole chiave..." onkeyup="filterList()">
-                <button onclick="sortListByName()">Ordina per Nome</button>
-            </div>
+   
 
                 <ul id="linkList">
        
