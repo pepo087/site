@@ -118,7 +118,7 @@ main {
             font-weight: bold;
             display: left;
             align-items: center; /* Allinea verticalmente */
-            padding: 15px 10px; /* Aggiungi un po' di padding */
+            padding: 20px 20px; /* Aggiungi un po' di padding */
         }
 
         /* Stile per l'icona della cartella */
@@ -126,7 +126,7 @@ main {
             width: 24px;
             height: 24px;
             margin-right: 5px; /* Spazio tra icona e testo */
-            vertical-align: middle; /* Centra verticalmente rispetto al testo */
+            vertical-align: center; /* Centra verticalmente rispetto al testo */
         }
 
         /* Stile per il contenuto della cartella */
