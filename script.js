@@ -64,7 +64,15 @@ document.querySelectorAll('nav a').forEach(link => {
            // Riaggiungi gli elementi ordinati alla lista
     items.forEach(item => list.appendChild(item));
 }
-   
+   function toggleLinks() {
+    const linkContainer = document.getElementById('linkContainer');
+    if (linkContainer.style.display === "none") {
+        linkContainer.style.display = "block"; // Mostra i link
+    } else {
+        linkContainer.style.display = "none"; // Nascondi i link
+    }
+}
+
 
    
     // Nascondi tutte le sezioni all'inizio
