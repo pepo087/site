@@ -126,7 +126,7 @@ main {
             width: 24px;
             height: 24px;
             margin-right: 5px; /* Spazio tra icona e testo */
-            vertical-align: center; /* Centra verticalmente rispetto al testo */
+            vertical-align: middle; /* Centra verticalmente rispetto al testo */
         }
 
         /* Stile per il contenuto della cartella */
