@@ -118,7 +118,7 @@ main {
             font-weight: bold;
             display: left;
             align-items: center; /* Allinea verticalmente */
-            padding: 20px 20px; /* Aggiungi un po' di padding */
+            padding: 5px 5px; /* Aggiungi un po' di padding */
         }
 
         /* Stile per l'icona della cartella */
