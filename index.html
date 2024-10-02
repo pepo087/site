@@ -88,14 +88,16 @@
 
 
 <section id="rabbit">
-    <h2><span class="icon-varie" onclick="toggleLinks()">Varie</span></h2>
-    
-    <div id="linkContainer" style="display: none;">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Cerca per parole chiave..." onkeyup="filterList()">
-            <button onclick="sortListByName()">Ordina per Nome</button>
-        </div>
+    <h2><span class="icon-varie" onclick="togglePopup()">Varie</span></h2>
 
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="togglePopup()">&times;</span>
+            <h2>Varie</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Cerca per parole chiave..." onkeyup="filterList()">
+                <button onclick="sortListByName()">Ordina per Nome</button>
+            </div>
 
                 <ul id="linkList">
        
@@ -135,8 +137,7 @@
     <li><A HREF="https://www.andreaminini.com/ai/machine-learning/dove-trovare-i-dataset" ADD_DATE="1522551288" target="_blank">machine-learning/dove-trovare-i-dataset</A>
                
 
-   </ul>         </div>
-
+   </ul>         </div>    </div>
    
     <h2>Networking Packet Life</h2>
     <li><A HREF="https://web.archive.org/web/20240612064952/https://packetlife.net/library/cheat-sheets/" ADD_DATE="1522551288" target="_blank">Networking packet life</A></li>
