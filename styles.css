@@ -134,12 +134,19 @@ main {
             display: none;
             list-style-type: disc; /* Rimuove i punti predefiniti */
             margin-left: 20px; /* Sposta il contenuto verso destra */
+            position: relative; /* Per allineare le linee dei rami */
+
         }
 
         .folder.open + .nested {
             display: block; /* Mostra il contenuto se la cartella è aperta */
         }
-
+        .nested li::before {
+            content: url('https://img.icons8.com/?size=100&id=Fdi7ntj1iIml&format=png'); /* Sostituisci con un'icona di ramo */
+            position: absolute;
+            left: -25px; /* Distanza dal punto del testo */
+            top: 7px;
+        }
 /* Contenitore del form */
 form {
     display: flex;
