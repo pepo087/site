@@ -132,7 +132,7 @@ main {
         /* Stile per il contenuto della cartella */
         .nested {
             display: none;
-            list-style-type: none; /* Rimuove i punti predefiniti */
+            list-style-type: disc; /* Rimuove i punti predefiniti */
             margin-left: 20px; /* Sposta il contenuto verso destra */
         }
 
