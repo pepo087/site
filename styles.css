@@ -112,50 +112,33 @@ main {
     flex: 1; /* Occupa tutto lo spazio disponibile tra header e footer */
         overflow-y: auto; /* Permette lo scrolling verticale se necessario */
 }
-.popup {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+/* Stile per il contenitore della cartella */
+        .folder {
+            cursor: pointer;
+            font-weight: bold;
+            display: left;
+            align-items: center; /* Allinea verticalmente */
+            padding: 15px 10px; /* Aggiungi un po' di padding */
+        }
 
-.popup.visible {
-    display: flex;
-}
+        /* Stile per l'icona della cartella */
+        .folder-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px; /* Spazio tra icona e testo */
+            vertical-align: middle; /* Centra verticalmente rispetto al testo */
+        }
 
-.popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 50%;
-}
+        /* Stile per il contenuto della cartella */
+        .nested {
+            display: none;
+            list-style-type: none; /* Rimuove i punti predefiniti */
+            margin-left: 20px; /* Sposta il contenuto verso destra */
+        }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.icon-varie {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-}
-
-.icon-varie::before {
-    content: url('img/download.png'); /* Icona personalizzata */
-    margin-right: 10px;
-    width: 24px;
-}
+        .folder.open + .nested {
+            display: block; /* Mostra il contenuto se la cartella è aperta */
+        }
 
 /* Contenitore del form */
 form {
