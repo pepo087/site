@@ -112,6 +112,15 @@ main {
     flex: 1; /* Occupa tutto lo spazio disponibile tra header e footer */
         overflow-y: auto; /* Permette lo scrolling verticale se necessario */
 }
+ul#linkList li {
+    display: flex;
+    align-items: center;
+}
+
+ul#linkList li img {
+    width: 20px; /* Dimensione dell'icona */
+    margin-right: 10px; /* Spazio tra l'icona e il testo */
+}
 
 
 /* Contenitore del form */
