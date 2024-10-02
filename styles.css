@@ -119,7 +119,7 @@ main {
 }
 
 .icon-varie::before {
-    content: url('/img/download.png'); /* Icona personalizzata */
+    content: url('img/download.png'); /* Icona personalizzata */
     margin-right: 10px;
     width: 24px;
 }
