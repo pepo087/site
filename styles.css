@@ -47,11 +47,13 @@ header {
 header nav ul {
     list-style: none;
     padding: 0;
+    z-index: 3; /* Posiziona l'header sopra il canvas */
 }
 
 header nav ul li {
     display: inline;
     margin: 0 15px;
+    z-index: 3; /* Posiziona l'header sopra il canvas */
 }
 
 header nav a {
@@ -63,6 +65,7 @@ header nav a {
 
 header nav a:hover {
     color: #ffa500;
+    z-index: 3; /* Posiziona l'header sopra il canvas */
 }
 #welcome {
     padding: 20px;
