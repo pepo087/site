@@ -39,7 +39,7 @@ header {
     padding: 20px 0;
     text-align: center;
     position: relative; /* Posizionamento relativo per header */
-    z-index: 0; /* Posiziona l'header sopra il canvas */
+   
 
 }
 
