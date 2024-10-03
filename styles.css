@@ -4,9 +4,9 @@ html,body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    z-index: 2; /* Il testo sarà sopra le particelle */
-
-     height: 100%; /* Assicurati che il body occupi tutta l'altezza della viewport */
+    
+overflow: hidden; /* Assicurati che non ci sia overflow */
+    height: 100%; /* Assicurati che il body occupi tutta l'altezza della viewport */
     display: flex;
     flex-direction: column;
 }
