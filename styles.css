@@ -63,7 +63,7 @@ header nav a {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s;
-     z-index:0;
+
 }
 
 header nav a:hover {
@@ -77,7 +77,7 @@ header nav a:hover {
     color: white; /* Colore del testo */
     text-align: center; /* Centro il testo */
     
-     z-index: 0; /* Posiziona l'header sopra il canvas */
+     
      display: inline-block; /* Consente al div di occupare solo lo spaz
 }
 #welcome {
