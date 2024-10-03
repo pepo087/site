@@ -15,7 +15,7 @@ html,body {
     left: 0; /* Posizionamento a sinistra */
     width: 100%; /* Larghezza al 100% */
     height: 100%; /* Altezza al 100% */
-    z-index: -1; /* Manda il canvas dietro gli altri elementi */
+    
     
 }
 #particles-js-footer{
