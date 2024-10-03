@@ -34,7 +34,6 @@ header {
     background-position: center; /* L'immagine è centrata */
     background-repeat: no-repeat; /* L'immagine non si ripete */
     background-attachment: fixed; /* Lo sfondo rimane fisso durante lo scrolling */
-    z-index: 2; /* Il testo sarà sopra le particelle */
     color: white;
     padding: 20px 0;
     text-align: center;
