@@ -15,6 +15,8 @@ html,body {
     height: 100%;
     background-color:transparent;
     background-size: cover;
+    z-index: 1; /* Le particelle saranno sotto il testo */
+
 }
 
 

@@ -42,12 +42,6 @@ document.querySelectorAll('nav a').forEach(link => {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    particlesJS.load('particles-js', 'path/to/particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
-});
-
 
     function toggleFolder() {
         var folderContainer = document.getElementById('folderContainer');
