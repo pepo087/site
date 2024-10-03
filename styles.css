@@ -208,5 +208,6 @@ background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
     text-align: center;
     padding: 5px 0; /* Aggiungi padding per un po' di spazio interno */
     width: 100%; /* Assicurati che il footer sia largo il 100% */
-}
+    position: relative; /* Posizionamento relativo per il footer */
+}    
 
