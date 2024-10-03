@@ -28,9 +28,7 @@ html,body {
     pointer-events: none; /* Disabilita gli eventi del mouse sul canvas */
 }
 
-canvas {
-    aspect-ratio: none; /* Remove aspect ratio if needed */
-}
+
 header {
     background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
@@ -41,7 +39,7 @@ header {
     padding: 20px 0;
     text-align: center;
     position: relative; /* Posizionamento relativo per header */
-    overflow: hidden; /* Nascondi eventuali contenuti in eccesso */
+    
     z-index: 2; /* Posiziona l'header sopra il canvas */
 
 }
