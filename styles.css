@@ -36,6 +36,7 @@ header {
     text-align: center;
     position: relative; /* Posizionamento relativo per header */
     overflow: hidden; /* Nascondi eventuali contenuti in eccesso */
+    z-index: 2; /* Posiziona l'header sopra il canvas */
 
 }
 
