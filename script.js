@@ -4,9 +4,7 @@
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', function(event) {
         // Solo impedire il comportamento predefinito per link specifici, se necessario
-        if (this.getAttribute('href').startsWith('#')) {
-            event.preventDefault(); // Solo per link di ancoraggio
-        }
+  
 
         const sectionId = this.getAttribute('href'); // Ottieni l'ID della sezione
         const section = document.querySelector(sectionId); // Seleziona la sezione
