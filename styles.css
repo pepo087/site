@@ -50,7 +50,7 @@ header {
 header nav ul {
     list-style: none;
     padding: 0;
-    
+     z-index:0;
 }
 
 header nav ul li {
@@ -63,12 +63,12 @@ header nav a {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s;
-    
+     z-index:0;
 }
 
 header nav a:hover {
     color: #ffa500;
-  
+   z-index:0;
 }
 
 
