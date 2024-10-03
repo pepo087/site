@@ -15,7 +15,8 @@ html,body {
     left: 0; /* Posizionamento a sinistra */
     width: 100%; /* Larghezza al 100% */
     height: 100%; /* Altezza al 100% */
-    
+ z-index: -1; /* Posiziona l'header sopra il canvas */
+
     
 }
 #particles-js-footer{
@@ -24,7 +25,8 @@ html,body {
     left: 0; /* Posizionamento a sinistra */
     width: 100%; /* Larghezza al 100% */
     height: 100%; /* Altezza al 100% */
-    
+    z-index: -1; /* Posiziona l'header sopra il canvas */
+ 
     
 }
 
@@ -76,8 +78,6 @@ header nav a:hover {
     text-align: center; /* Centro il testo */
     position: relative; /* Posizionamento relativo per il titolo */
      z-index: 0; /* Posiziona l'header sopra il canvas */
-
-    
      display: inline-block; /* Consente al div di occupare solo lo spaz
 }
 #welcome {
