@@ -42,6 +42,16 @@ header {
     z-index: 0; /* Posiziona l'header sopra il canvas */
 
 }
+.header-title {
+    font-size: 3rem; /* Modifica la dimensione del font come preferisci */
+    color: white; /* Colore del testo */
+    text-align: center; /* Centro il testo */
+    position: relative; /* Posizionamento relativo per il titolo */
+     z-index: 0; /* Posiziona l'header sopra il canvas */
+    margin: 0; /* Rimuove il margine predefinito */
+    padding: 20px 0; /* Aggiunge padding verticale */
+}
+
 
 header nav ul {
     list-style: none;
