@@ -1,3 +1,11 @@
+// Carica Particles.js
+document.addEventListener("DOMContentLoaded", function() {
+    particlesJS.load('particles-js', 'Particles.json', function() {
+        console.log('callback - particles.js config loaded');
+    });
+});
+
+
 // Funzione per mostrare/nascondere le sezioni al clic
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', function(event) {
@@ -111,9 +119,3 @@ if (welcomeSection) {
         content.classList.add('visible'); // Aggiungi la classe visibile alla sezione di benvenuto
     }
 }
-// Carica Particles.js
-document.addEventListener("DOMContentLoaded", function() {
-    particlesJS.load('particles-js', 'Particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
-});
