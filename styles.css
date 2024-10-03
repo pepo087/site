@@ -5,7 +5,7 @@ html,body {
     padding: 0;
     background-color: #f4f4f4;
     
-overflow: hidden; /* Assicurati che non ci sia overflow */
+
     height: 100%; /* Assicurati che il body occupi tutta l'altezza della viewport */
     display: flex;
     flex-direction: column;
@@ -30,7 +30,9 @@ header {
     color: white;
     padding: 20px 0;
     text-align: center;
-    position: relative; /* Posizionamento relativo per il footer */
+    position: relative; /* Posizionamento relativo per header */
+    overflow: hidden; /* Nascondi eventuali contenuti in eccesso */
+
 }
 
 header nav ul {
