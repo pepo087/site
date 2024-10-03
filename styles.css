@@ -30,6 +30,7 @@ header {
     color: white;
     padding: 20px 0;
     text-align: center;
+    position: relative; /* Posizionamento relativo per il footer */
 }
 
 header nav ul {
