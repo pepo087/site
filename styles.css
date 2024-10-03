@@ -9,7 +9,7 @@ html,body {
     flex-direction: column;
 }
 #particles-js-header{
-    position: relative; /* Posizionamento assoluto */
+    position: absolute; /* Posizionamento assoluto */
     top: 0; /* Posizionamento in alto */
     left: 0; /* Posizionamento a sinistra */
     width: 100%; /* Larghezza al 100% */
