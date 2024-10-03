@@ -1,5 +1,5 @@
 {
-   "particles": {
+  "particles": {
     "number": {
       "value": 80,
       "density": {
@@ -18,7 +18,7 @@
       },
       "polygon": {
         "nb_sides": 5
-      },
+      }
     },
     "opacity": {
       "value": 0.5,
@@ -103,3 +103,4 @@
   },
   "retina_detect": true
 }
+
