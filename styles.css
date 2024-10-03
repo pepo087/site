@@ -25,6 +25,10 @@ html,body {
     z-index: 1; /* Z-index basso per il canvas */
     pointer-events: none; /* Disabilita gli eventi del mouse sul canvas */
 }
+
+canvas {
+    aspect-ratio: none; /* Remove aspect ratio if needed */
+}
 header {
     background-image: url('img/peakpx.jpg'); /* Percorso dell'immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
