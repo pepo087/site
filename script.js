@@ -1,9 +1,3 @@
-// Carica Particles.js
-document.addEventListener("DOMContentLoaded", function() {
-    particlesJS.load('particles-js', 'Particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
-});
 
 
 // Funzione per mostrare/nascondere le sezioni al clic
