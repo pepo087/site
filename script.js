@@ -111,3 +111,9 @@ if (welcomeSection) {
         content.classList.add('visible'); // Aggiungi la classe visibile alla sezione di benvenuto
     }
 }
+// Carica Particles.js
+document.addEventListener("DOMContentLoaded", function() {
+    particlesJS.load('particles-js', 'Particles.json', function() {
+        console.log('callback - particles.js config loaded');
+    });
+});
