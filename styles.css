@@ -50,6 +50,7 @@ header {
      z-index: 0; /* Posiziona l'header sopra il canvas */
     margin: 0; /* Rimuove il margine predefinito */
     padding: 20px 0; /* Aggiunge padding verticale */
+     display: inline-block; /* Consente al div di occupare solo lo spaz
 }
 
 
