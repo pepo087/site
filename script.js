@@ -56,3 +56,12 @@ if (welcomeSection) {
         content.classList.add('visible'); // Aggiungi la classe visibile alla sezione di benvenuto
     }
 }
+document.addEventListener("DOMContentLoaded", function() {
+    particlesJS.load('particles-js-header', 'Particles.json', function() {
+        console.log('callback - particles.js header config loaded');
+    });
+
+    particlesJS.load('particles-js-footer', 'Particles.json', function() {
+        console.log('callback - particles.js footer config loaded');
+    });
+});
