@@ -1,34 +1,27 @@
-
-
 // Funzione per mostrare/nascondere le sezioni al clic
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', function(event) {
         // Solo impedire il comportamento predefinito per link specifici, se necessario
-  
 
         const sectionId = this.getAttribute('href'); // Ottieni l'ID della sezione
         const section = document.querySelector(sectionId); // Seleziona la sezione
 
-        // Nascondi tutte le sezioni
+        // Nascondi tutte le sezioni aggiungendo la classe 'hidden'
         document.querySelectorAll('section').forEach(sec => {
             const content = sec.querySelector('.section-content');
-            if (content) { // Controlla se l'elemento è presente
+            if (content) {
                 content.classList.remove('visible'); // Rimuovi la classe visibile
             }
-            // Nascondi anche gli item di progetto
-            sec.querySelectorAll('.project-item').forEach(item => {
-                item.classList.remove('visible');
-            });
-            sec.style.display = "none"; // Nascondi tutte le sezioni
+            sec.classList.add('hidden'); // Nascondi tutte le sezioni aggiungendo 'hidden'
         });
 
-        // Mostra la sezione cliccata
-        section.style.display = "block"; // Mostra la sezione selezionata
+        // Mostra la sezione cliccata rimuovendo la classe 'hidden'
+        section.classList.remove('hidden'); // Mostra la sezione selezionata
         
         // Aggiungi un timeout per assicurarti che la sezione sia visibile prima di aggiungere la classe
         setTimeout(() => {
             const content = section.querySelector('.section-content');
-            if (content) { // Controlla se l'elemento è presente
+            if (content) {
                 content.classList.add('visible'); // Aggiungi la classe visibile alla sezione
             }
 
@@ -37,92 +30,29 @@ document.querySelectorAll('nav a').forEach(link => {
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('visible'); // Aggiungi la classe visibile a ciascun progetto
-                }, index * 1000); // Ritardo incrementale per ciascun elemento (300 ms per esempio)
+                }, index * 1000); // Ritardo incrementale per ciascun elemento (1000 ms per esempio)
             });
         }, 50); // Breve ritardo per permettere alla sezione di essere visibile
     });
 });
 
+// Funzione per mostrare/nascondere cartelle
+function toggleFolder() {
+    var folderContainer = document.getElementById('folderContainer');
+    folderContainer.classList.toggle('hidden'); // Usa la classe hidden per il toggle
+}
 
-
-
-    function toggleFolder() {
-        var folderContainer = document.getElementById('folderContainer');
-        folderContainer.style.display = folderContainer.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function toggleFolderContent(folder) {
-        var nested = folder.nextElementSibling;
-        if (nested) {
-            // Toggle the display of the nested folder
-            nested.style.display = nested.style.display === 'none' || nested.style.display === '' ? 'block' : 'none';
-            // Toggle the 'open' class
-            folder.classList.toggle('open');
-        }
-    }
-
-    function filterList() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("searchInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("folderList");
-        li = ul.getElementsByTagName("li");
-        
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-
-    function sortListByName() {
-        var ul = document.getElementById("folderList");
-        var li = Array.from(ul.getElementsByTagName("li"));
-        
-        li.sort(function(a, b) {
-            var nameA = a.getElementsByTagName("a")[0].textContent.toLowerCase();
-            var nameB = b.getElementsByTagName("a")[0].textContent.toLowerCase();
-            return nameA.localeCompare(nameB);
-        });
-
-        ul.innerHTML = "";
-        li.forEach(function(item) {
-            ul.appendChild(item);
-        });
-    }
-
-
-
-   
-    // Nascondi tutte le sezioni all'inizio
+// Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
-    section.style.display = "none";
+    section.classList.add('hidden'); // Usa la classe hidden per nascondere le sezioni
 });
-
-
 
 // Mostra la sezione di benvenuto all'inizio
 const welcomeSection = document.getElementById('welcome');
 if (welcomeSection) {
-    welcomeSection.style.display = "block"; // Mostra la sezione di benvenuto
+    welcomeSection.classList.remove('hidden'); // Mostra la sezione di benvenuto
     const content = welcomeSection.querySelector('.section-content');
     if (content) {
         content.classList.add('visible'); // Aggiungi la classe visibile alla sezione di benvenuto
     }
 }
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    particlesJS.load('particles-js-header', 'Particles.json', function() {
-        console.log('callback - particles.js header config loaded');
-    });
-
-    particlesJS.load('particles-js-footer', 'Particles.json', function() {
-        console.log('callback - particles.js footer config loaded');
-    });
-});
