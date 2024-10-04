@@ -41,6 +41,15 @@ function toggleFolder() {
     var folderContainer = document.getElementById('folderContainer');
     folderContainer.classList.toggle('hidden'); // Usa la classe hidden per il toggle
 }
+function toggleFolderContent(folder) {
+    var nested = folder.nextElementSibling;
+    if (nested) {
+        // Toggle the 'hidden' class to show/hide the nested folder
+        nested.classList.toggle('hidden');
+        // Toggle the 'open' class to indicate the folder is open/closed
+        folder.classList.toggle('open');
+    }
+}
 
 // Nascondi tutte le sezioni all'inizio
 document.querySelectorAll('section').forEach(section => {
