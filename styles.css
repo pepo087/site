@@ -71,7 +71,7 @@ header nav a:hover {
    
 }
 
-#header-title {
+header #header-title {
     font-size: 30px; /* Modifica la dimensione del font come preferisci */
     color: white; /* Colore del testo */
     text-align: center; /* Centro il testo */
