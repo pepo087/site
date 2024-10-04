@@ -74,13 +74,11 @@ header nav a:hover {
    
 }
 
-header #header-title {
+#header-title {
     font-size: 30px; /* Modifica la dimensione del font come preferisci */
     color: white; /* Colore del testo */
     text-align: center; /* Centro il testo */
-    display: inline; /* Consente al div di occupare solo lo spaz
-    margin: 0 !important;
-    padding: 0 !important;
+    
 }
 
 #welcome {
