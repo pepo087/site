@@ -1,10 +1,12 @@
 name: Esegui script Python
 
 on:
+  schedule:
+    - cron: '0 9 * * *'  # Runs at 9:00 AM UTC every day
   push:
     branches:
       - main
-  workflow_dispatch: # Avvia il workflow manualmente
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   run-python-script:
