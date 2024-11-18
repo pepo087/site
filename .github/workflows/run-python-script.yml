@@ -26,10 +26,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install webdriver-manager  # Aggiungi per gestire il ChromeDriver
 
-      # Step 4: Esegui lo script Python
+      # Step 4: Installa Xvfb per il supporto headless
+      - name: Installa Xvfb
+        run: sudo apt-get install -y xvfb
+
+      # Step 5: Esegui lo script Python
       - name: Esegui lo script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python req.py
+        run: |
+          Xvfb :99 &    # Avvia Xvfb in background per simulare un display
+          export DISPLAY=:99
+          python req.py  # Esegui lo script Python con il display virtuale
+
