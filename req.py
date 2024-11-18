@@ -16,7 +16,7 @@ from datetime import datetime
 
 # Carica le variabili d'ambiente dal file .env
 load_dotenv()
-PEPOGIT_TOKEN = os.getenv("PEPOGIT_TOKEN")
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')  # Aggiungi la chiave API per Gemini
 
 # Configura il servizio per ChromeDriver
@@ -27,7 +27,7 @@ driver = webdriver.Chrome(service=service)
 def publish_gist(content, description, filename="offerta_mini_pc.md", public=True):
     """Pubblica il contenuto come Gist su GitHub."""
     url = "https://api.github.com/gists"
-    headers = {"Authorization": f"token {PEPOGIT_TOKEN}"}
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     data = {
         "description": description,
         "public": public,
