@@ -35,7 +35,7 @@ jobs:
       # Step 5: Esegui lo script Python
       - name: Esegui lo script
         env:
-          PEPOGIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PEPOGIT_TOKEN: ${{ secrets.PEPOGIT_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           Xvfb :99 &    # Avvia Xvfb in background per simulare un display
