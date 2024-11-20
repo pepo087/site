@@ -44,15 +44,8 @@ def publish_gist(content, description, filename="offerta_mini_pc.md", public=Tru
     else:
         print("Errore nella pubblicazione del Gist:", response.json())
 
-# Funzione per sostituire il tag di affiliazione Amazon con quello corretto
-def update_amazon_affiliate_links(content, affiliate_tag="pepo087site-21"):
-    # Trova i link Amazon e sostituisci i tag di affiliazione con quello corretto
-    content = re.sub(
-        r'(https://www\.amazon\.[\w\.\/-]+?)(\?.*?tag=[^&\s]+|)(?=&|\s|$)',
-        rf'\1?tag={affiliate_tag}',
-        content
-    )
-    return content
+# 
+   
 
 try:
     # Link RSS feed di Google News
@@ -118,7 +111,7 @@ try:
             "2. **Content**: Include all main content from the article in Markdown format.\n"
             "3. **Images**: Extract links to images and format each image like this: ![Alt text](URL).\n"
             "4. **Links**: If available, clearly include any relevant links.\n"
-            "5. **Amazon Affiliate Links**: Replace any Amazon links by adding the correct affiliate tag '?tag=pepo087site-21' to the URL.\n"
+            
             "\nHere is the page content:\n\n" + webpage_content
         )
 
