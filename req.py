@@ -134,8 +134,7 @@ try:
         # Visualizza il contenuto Markdown
         print(markdown_content)
 
-        # Aggiorna i link Amazon con il tag corretto
-        markdown_content = update_amazon_affiliate_links(markdown_content)
+  
 
         # Estrai il titolo dall'intestazione H1
         title = markdown_content.split("\n")[0][2:]  # Estrae il titolo dall'intestazione H1
