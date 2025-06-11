@@ -28,13 +28,10 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Feed RSS/Atom da cui attingere
 RSS_SOURCES = {
+  
     "Linux.com News":           "https://www.linux.com/feed/",
-    "Planet OpenSource":            "https://opensource.com/feed",
+    "Planet Ubuntu":            "https://planet.ubuntu.com/rss20.xml",
     "Kernel.org Announcements": "https://www.kernel.org/feeds/kdist.xml",
-    "Docker blog":"https://www.docker.com/blog/feed/",
-    "React Blog":                  "https://reactjs.org/feed.xml",
-    "phoronix" : "https://www.phoronix.com/rss.php",
-    
 }
 
 # Namespace per Atom
@@ -73,7 +70,6 @@ def parse_feed(xml_bytes: bytes) -> List[Article]:
             dt = parsedate_to_datetime(date)
             dt = normalize_dt(dt)
         except Exception:
-            print(f"[WARN] Data RSS non parsabile: {date}")
             continue
         articles.append(Article(title=title, link=link, pub_date=dt))
 
@@ -90,7 +86,6 @@ def parse_feed(xml_bytes: bytes) -> List[Article]:
             try:
                 dt = datetime.fromisoformat(date.replace("Z", "+00:00"))
             except Exception:
-                print(f"[WARN] Data Atom non parsabile: {date}")
                 continue
         dt = normalize_dt(dt)
         articles.append(Article(title=title.strip(), link=link.strip(), pub_date=dt))
@@ -106,20 +101,23 @@ def safe_filename(title: str) -> str:
 
 def has_enough_text(html: str, min_chars: int = 300) -> bool:
     """
-    Verifica che l'HTML contenga almeno min_chars caratteri di testo visibile.
+    Verifica che l'HTML contenga almeno min_chars caratteri di testo visibile,
+    escludendo link e URL.
     """
     soup = BeautifulSoup(html, "html.parser")
+    # Rimuovi tag non testuali
     for tag in soup(["script", "style", "noscript", "header", "footer", "aside"]):
         tag.extract()
+    # Rimuovi link <a>
+    for a in soup.find_all('a'):
+        a.extract()
     text = soup.get_text(separator=" ", strip=True)
+    # Rimuovi URL espliciti da testo
+    text = re.sub(r'https?://\S+', '', text)
     return len(text) >= min_chars
 
 
 def scrape_full_text(url: str) -> str:
-    """
-    Avvia Chrome headless con profilo temporaneo, gestisce cookie banner,
-    e restituisce il page_source completo.
-    """
     user_data_dir = tempfile.mkdtemp(prefix="chrome-profile-")
     chrome_opts = Options()
     chrome_opts.add_argument("--headless=new")
@@ -136,7 +134,7 @@ def scrape_full_text(url: str) -> str:
         for text in ("Rifiuta tutto", "Accetta tutti", "Reject all", "Accept all"):
             try:
                 btn = WebDriverWait(driver, 15).until(
-                    EC.element_to_be_clickable((By.XPATH, f"//button[contains(., '{text}')]") )
+                    EC.element_to_be_clickable((By.XPATH, f"//button[contains(., '{text}')]))")
                 )
                 btn.click()
                 time.sleep(2)
@@ -187,14 +185,9 @@ def main():
         try:
             xml = fetch_feed_xml(url)
             all_articles.extend(parse_feed(xml))
-        except Exception as e:
-            print(f"[WARN] Feed '{name}' skip: {e}")
+        except Exception:
+            pass
 
-    if not all_articles:
-        print("▶️ Nessun articolo valido trovato.")
-        return
-
-    # Prendiamo fino a 10 candidati per filtrare
     candidates = all_articles[:10]
     published = 0
 
@@ -202,21 +195,14 @@ def main():
         if published >= 5:
             break
 
-        print(f"→ Verifico sostanza: {art.title}")
         html = scrape_full_text(art.link)
-
         if not has_enough_text(html, min_chars=300):
-            print(f"[SKIP] Troppe poche parole ({art.title})")
             continue
 
         md    = extract_markdown(html)
         fname = safe_filename(art.title)
         publish_gist(md, art.title, fname)
-
         published += 1
-
-    if published == 0:
-        print("⚠️ Nessun articolo soddisfa il criterio di sostanza.")
 
 if __name__ == "__main__":
     main()
