@@ -1,149 +1,143 @@
-import time
 import os
+import re
+import time                                # <— import time per le pause dopo il click
 import requests
 import xml.etree.ElementTree as ET
+from datetime import datetime
+from dataclasses import dataclass
+from typing import List, Optional
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import load_dotenv
-import re
-import litellm  # Importa la libreria litellm
-from datetime import datetime
+import litellm
 
-# Carica le variabili d'ambiente dal file .env
+# Carica le variabili d’ambiente
 load_dotenv()
-PEPOGIT_TOKEN = os.getenv("PEPOGIT_TOKEN")
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')  # Aggiungi la chiave API per Gemini
+PEPOGIT_TOKEN   = os.getenv("PEPOGIT_TOKEN")
+GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY")
 
-# Configura il servizio per ChromeDriver
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+# Definisci qui le sorgenti RSS di progetti/doc/guide Linux open-source
+RSS_SOURCES = {
+    "Linux.com News":           "https://www.linux.com/feed/",
+    "DistroWatch News":         "https://distrowatch.com/news/dwd.xml",
+    "LWN.net Headlines":        "https://lwn.net/headlines/xml/",
+    "Planet Ubuntu":            "https://planet.ubuntu.com/rss20.xml",
+    "Kernel.org Announcements": "https://www.kernel.org/feeds/kdist.xml",
+}
 
-# Funzione per pubblicare un Gist su GitHub
-def publish_gist(content, description, filename="offerta_mini_pc.md", public=True):
-    """Pubblica il contenuto come Gist su GitHub."""
-    url = "https://api.github.com/gists"
-    headers = {"Authorization": f"token {PEPOGIT_TOKEN}"}
-    data = {
-        "description": description,
-        "public": public,
-        "files": {
-            filename: {
-                "content": content
-            }
-        }
-    }
-    
-    response = requests.post(url, json=data, headers=headers)
-    if response.status_code == 201:
-        print("Gist pubblicato con successo:", response.json()["html_url"])
-    else:
-        print("Errore nella pubblicazione del Gist:", response.json())
+@dataclass
+class Article:
+    title: str
+    link: str
+    pub_date: datetime
 
-# 
-   
+def fetch_feed(url: str, timeout: int = 10) -> Optional[bytes]:
+    """Scarica il contenuto raw dell’RSS feed."""
+    resp = requests.get(url, timeout=timeout)
+    resp.raise_for_status()
+    return resp.content
 
-try:
-    # Link RSS feed di Google News
-    rss_url = "https://news.google.com/rss/search?q=%7BMINI+PC+OFFERTA+AMAZON%7D&hl=it&gl=IT&ceid=IT:it"
-   
-    # Scarica l'RSS feed
-    response = requests.get(rss_url)
-    xml_content = response.content
-
-    # Parsing dell'XML per estrarre il link con la data di pubblicazione più recente
-    root = ET.fromstring(xml_content)
-    latest_link = None
-    latest_date = None
-
+def parse_feed(xml_bytes: bytes) -> List[Article]:
+    """Estrae tutti gli <item> da un feed RSS, li ordina per data di pubblicazione."""
+    root = ET.fromstring(xml_bytes)
+    articles = []
     for item in root.findall("./channel/item"):
-        # Estrai la data di pubblicazione
-        pub_date = item.find("pubDate").text
-        link = item.find("link").text
-
-        # Converte la data di pubblicazione in un oggetto datetime
+        title = item.findtext("title", default="").strip()
+        link  = item.findtext("link",  default="").strip()
+        date  = item.findtext("pubDate", default="").strip()
         try:
-            pub_date_obj = datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %Z")
+            dt = datetime.strptime(date, "%a, %d %b %Y %H:%M:%S %Z")
         except ValueError:
-            print("Formato data non valido per:", pub_date)
             continue
+        articles.append(Article(title=title, link=link, pub_date=dt))
+    # Ordina in ordine decrescente di data
+    return sorted(articles, key=lambda a: a.pub_date, reverse=True)
 
-        # Aggiorna il link se è la data più recente
-        if latest_date is None or pub_date_obj > latest_date:
-            latest_date = pub_date_obj
-            latest_link = link
-
-    print("Ultimo link trovato:", latest_link)
-
-    if latest_link:
-        # Apri l'ultimo link
-        driver.get(latest_link)
-
-        # Gestione del consenso
+def scrape_full_text(url: str) -> str:
+    """Usa Selenium + BeautifulSoup per aggirare cookie banner e ottenere HTML pulito."""
+    service = Service(ChromeDriverManager().install())
+    driver  = webdriver.Chrome(service=service)
+    try:
+        driver.get(url)
+        # Attendi e clicca “Rifiuta tutto” se presente
         try:
-            reject_button = WebDriverWait(driver, 20).until(
+            btn = WebDriverWait(driver, 15).until(
                 EC.element_to_be_clickable((By.XPATH, "//span[text()='Rifiuta tutto']"))
             )
-            reject_button.click()
-            time.sleep(5)
-            WebDriverWait(driver, 20).until(EC.url_changes(latest_link))
+            btn.click()
+            time.sleep(3)
+        except Exception:
+            pass
+        html = driver.page_source
+    finally:
+        driver.quit()
+    return html
 
-            final_url = driver.current_url
-            print("Final URL:", final_url)
+def extract_markdown(html: str) -> str:
+    """Invoca Gemini via litellm per estrarre titolo, contenuti e immagini in Markdown."""
+    prompt = (
+        "Extract the following information from the HTML page and format in Markdown:\n"
+        "1. **Title** as H1\n"
+        "2. **Main content**\n"
+        "3. **Images** as ![alt](url)\n"
+        "4. **Links**\n\n"
+        + html
+    )
+    resp = litellm.completion(
+        model="gemini/gemini-1.5-flash",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return resp["choices"][0]["message"]["content"]
+
+def publish_gist(content: str, description: str, filename: str) -> None:
+    """Pubblica un Gist GitHub contenente il Markdown estratto."""
+    url = "https://api.github.com/gists"
+    hdr = {"Authorization": f"token {PEPOGIT_TOKEN}"}
+    data = {
+        "description": description,
+        "public": True,
+        "files": { filename: {"content": content} }
+    }
+    r = requests.post(url, json=data, headers=hdr)
+    if r.status_code == 201:
+        print("Gist creato:", r.json()["html_url"])
+    else:
+        print("Errore Gist:", r.status_code, r.json())
+
+def safe_filename(title: str) -> str:
+    """Rimuove caratteri non validi e sostituisce spazi con underscore."""
+    cleaned = re.sub(r'[<>:"/\\|?*]', '', title)
+    return re.sub(r'\s+', '_', cleaned)
+
+def main():
+    # 1. Scarica e parsifica tutti i feed
+    all_articles: List[Article] = []
+    for name, rss in RSS_SOURCES.items():
+        try:
+            xml = fetch_feed(rss)
+            all_articles.extend(parse_feed(xml))
         except Exception as e:
-            print("Errore nella gestione del consenso:", e)
+            print(f"Errore fetch/parse per {name}: {e}")
+    if not all_articles:
+        print("Nessun articolo trovato.")
+        return
 
-        # Scarica il contenuto della pagina
-        page_source = driver.page_source
-        soup = BeautifulSoup(page_source, "html.parser")
+    # 2. Prendi i 5 articoli più recenti
+    latest_five = all_articles[:5]
 
-        # Estrai il contenuto della pagina come stringa
-        webpage_content = str(soup)
+    # 3. Processa ciascun articolo e pubblica un Gist
+    for idx, article in enumerate(latest_five, start=1):
+        print(f"[{idx}/5] Processing: {article.title} ({article.pub_date.isoformat()})")
+        html = scrape_full_text(article.link)
+        md   = extract_markdown(html)
+        fname = safe_filename(article.title) + ".md"
+        publish_gist(content=md, description=article.title, filename=fname)
 
-        # Prompt per estrarre informazioni in Markdown
-        prompt = (
-            "Extract the following information from the article and format it in Markdown:\n"
-            "1. **Title**: Extract the title of the article and format it as an H1 header (e.g., # Article Title).\n"
-            "2. **Content**: Include all main content from the article in Markdown format.\n"
-            "3. **Images**: Extract links to images and format each image like this: ![Alt text](URL).\n"
-            "4. **Links**: If available, clearly include any relevant links.\n"
-            
-            "\nHere is the page content:\n\n" + webpage_content
-        )
-
-        # Crea il payload per la richiesta a Gemini usando litellm
-        messages = [
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-
-        # Esegui la chiamata API al modello Gemini utilizzando litellm
-        response = litellm.completion(
-            model="gemini/gemini-1.5-flash",
-            messages=messages
-        )
-
-        # Estrai il contenuto Markdown dalla risposta
-        markdown_content = response["choices"][0]["message"]["content"]
-        # Visualizza il contenuto Markdown
-        print(markdown_content)
-
-  
-
-        # Estrai il titolo dall'intestazione H1
-        title = markdown_content.split("\n")[0][2:]  # Estrae il titolo dall'intestazione H1
-        # Rimuovi caratteri speciali e sostituisci gli spazi con underscore
-        filename = re.sub(r'[<>:"/\\|?*]', '', title)  # Rimuovi caratteri non validi
-        filename = re.sub(r'\s+', '_', filename) + '.md'  # Sostituisci spazi con underscore e aggiungi l'estensione .md
-
-        # Pubblica il contenuto in Markdown su GitHub come Gist
-        publish_gist(markdown_content, description=title, filename=filename)
-
-finally:
-    driver.quit()
+if __name__ == "__main__":
+    main()
