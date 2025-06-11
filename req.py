@@ -28,7 +28,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Feed RSS/Atom da cui attingere
 RSS_SOURCES = {
-  
+    "GitHub Trending (mensile)": "https://github.com/trending?since=monthly.atom",
     "Linux.com News":           "https://www.linux.com/feed/",
     "Planet Ubuntu":            "https://planet.ubuntu.com/rss20.xml",
     "Kernel.org Announcements": "https://www.kernel.org/feeds/kdist.xml",
@@ -95,7 +95,7 @@ def parse_feed(xml_bytes: bytes) -> List[Article]:
 
 
 def safe_filename(title: str) -> str:
-    cleaned = re.sub(r'[<>:"/\\|?*]', '', title)
+    cleaned = re.sub(r'[<>:\"/\\|?*]', '', title)
     return re.sub(r'\s+', '_', cleaned) + ".md"
 
 
@@ -105,14 +105,11 @@ def has_enough_text(html: str, min_chars: int = 300) -> bool:
     escludendo link e URL.
     """
     soup = BeautifulSoup(html, "html.parser")
-    # Rimuovi tag non testuali
     for tag in soup(["script", "style", "noscript", "header", "footer", "aside"]):
         tag.extract()
-    # Rimuovi link <a>
     for a in soup.find_all('a'):
         a.extract()
     text = soup.get_text(separator=" ", strip=True)
-    # Rimuovi URL espliciti da testo
     text = re.sub(r'https?://\S+', '', text)
     return len(text) >= min_chars
 
@@ -134,7 +131,7 @@ def scrape_full_text(url: str) -> str:
         for text in ("Rifiuta tutto", "Accetta tutti", "Reject all", "Accept all"):
             try:
                 btn = WebDriverWait(driver, 15).until(
-                    EC.element_to_be_clickable((By.XPATH, f"//button[contains(., '{text}')]))")
+                    EC.element_to_be_clickable((By.XPATH, f"//button[contains(., '{text}')]") )
                 )
                 btn.click()
                 time.sleep(2)
@@ -206,3 +203,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
