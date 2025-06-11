@@ -4,6 +4,7 @@ import time
 import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -22,13 +23,14 @@ load_dotenv()
 PEPOGIT_TOKEN  = os.getenv("PEPOGIT_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# I feed funzionanti
+# Definisci qui le sorgenti RSS/Atom
 RSS_SOURCES = {
     "Linux.com News":           "https://www.linux.com/feed/",
     "Planet Ubuntu":            "https://planet.ubuntu.com/rss20.xml",
     "Kernel.org Announcements": "https://www.kernel.org/feeds/kdist.xml",
 }
 
+# Namespace per Atom
 ATOM_NS = {"atom": "http://www.w3.org/2005/Atom"}
 
 @dataclass
@@ -44,34 +46,39 @@ def fetch_feed_xml(url: str, timeout: int = 10) -> Optional[bytes]:
     return resp.content
 
 def parse_feed(xml_bytes: bytes) -> List[Article]:
-    """Estrae articoli sia da RSS (<item>) che da Atom (<entry>)."""
+    """Estrae articoli sia da RSS (<item>) che da Atom (<entry>), con parsing date robusto."""
     root = ET.fromstring(xml_bytes)
     articles: List[Article] = []
 
-    # 1) RSS standard
+    # 1) RSS standard (<item>)
     for item in root.findall("./channel/item"):
-        t = item.findtext("title", default="").strip()
-        l = item.findtext("link",  default="").strip()
-        d = item.findtext("pubDate", default="").strip()
+        title = item.findtext("title", default="").strip()
+        link  = item.findtext("link",  default="").strip()
+        date  = item.findtext("pubDate", default="").strip()
         try:
-            dt = datetime.strptime(d, "%a, %d %b %Y %H:%M:%S %Z")
-        except ValueError:
-            continue
-        articles.append(Article(title=t, link=l, pub_date=dt))
-
-    # 2) Atom
-    for entry in root.findall("atom:entry", ATOM_NS):
-        t = entry.findtext("atom:title",   namespaces=ATOM_NS) or ""
-        # cerchiamo il link alternativo
-        link_el = entry.find("atom:link[@rel='alternate']", ATOM_NS)
-        l = link_el.get("href") if link_el is not None else ""
-        d = entry.findtext("atom:updated",   namespaces=ATOM_NS) \
-            or entry.findtext("atom:published", namespaces=ATOM_NS) or ""
-        try:
-            dt = datetime.fromisoformat(d.rstrip("Z"))
+            dt = parsedate_to_datetime(date)
         except Exception:
+            print(f"[WARN] Data RSS non parsabile: {date}")
             continue
-        articles.append(Article(title=t.strip(), link=l.strip(), pub_date=dt))
+        articles.append(Article(title=title, link=link, pub_date=dt))
+
+    # 2) Atom (<entry>)
+    for entry in root.findall("atom:entry", ATOM_NS):
+        title = entry.findtext("atom:title", namespaces=ATOM_NS) or ""
+        link_el = entry.find("atom:link[@rel='alternate']", ATOM_NS)
+        link    = link_el.get("href") if link_el is not None else ""
+        date    = entry.findtext("atom:updated", namespaces=ATOM_NS) \
+               or entry.findtext("atom:published", namespaces=ATOM_NS) or ""
+        try:
+            dt = parsedate_to_datetime(date)
+        except Exception:
+            # fallback a ISO format
+            try:
+                dt = datetime.fromisoformat(date.replace("Z", "+00:00"))
+            except Exception:
+                print(f"[WARN] Data Atom non parsabile: {date}")
+                continue
+        articles.append(Article(title=title.strip(), link=link.strip(), pub_date=dt))
 
     # Ordina per data decrescente
     return sorted(articles, key=lambda a: a.pub_date, reverse=True)
@@ -106,11 +113,12 @@ def extract_markdown(html: str) -> str:
         "1. **Title** as H1\n"
         "2. **Main content**\n"
         "3. **Images** as ![alt](url)\n"
-        "4. **Links**\n\n" + html
+        "4. **Links**\n\n"
+        + html
     )
     resp = litellm.completion(
         model="gemini/gemini-1.5-flash",
-        messages=[{"role":"user","content":prompt}]
+        messages=[{"role": "user", "content": prompt}]
     )
     return resp["choices"][0]["message"]["content"]
 
@@ -130,21 +138,23 @@ def publish_gist(content: str, description: str, filename: str):
         print(f"[ERR] Fallita pubblicazione (status {r.status_code}): {r.text}")
 
 def main():
+    # 1. Raccogli articoli da tutti i feed
     all_articles: List[Article] = []
     for name, url in RSS_SOURCES.items():
         try:
             xml = fetch_feed_xml(url)
             all_articles.extend(parse_feed(xml))
         except Exception as e:
-            print(f"[WARN] Feed '{name}' salto per errore: {e}")
+            print(f"[WARN] Feed '{name}' scartato per errore: {e}")
 
     if not all_articles:
         print("▶️ Nessun articolo valido trovato.")
         return
 
-    # Prendi i 5 più recenti
+    # 2. Ordina e prendi i primi 5
     top5 = sorted(all_articles, key=lambda a: a.pub_date, reverse=True)[:5]
 
+    # 3. Processa e pubblica un Gist per ciascuno
     for idx, art in enumerate(top5, start=1):
         print(f"[{idx}/5] {art.title} ({art.pub_date.isoformat()})")
         html = scrape_full_text(art.link)
